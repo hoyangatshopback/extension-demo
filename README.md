@@ -1,46 +1,11 @@
-# Extension React Webpack boilerplate
+# Extension Demo
 
-A simple web extension with react and webpack
+## Modularization
 
-## Features
+In a browser, the most compatible is to export a module as global. That's why AMD and CMD comes in at the past. CommonJS is using `require`, it's a part of Nodejs engineering. However, there is a modern way of modularize components using `<script type="module" />`
 
-### Webpack
+## Memorization
 
-- webpack
-- webpack-cli
-- webpack-dev-server
+If using content and message extension script, the code of modules can be cached.
 
-### Loaders
-
-- babel-loader
-- eslint-loader
-
-- CSS
-  - style-loader
-  - css-loader
-
-- SASS (CSS module enabled)
-  - style-loader
-  - sass-loader
-  - postcss-loader
-  - css-loader
-
-### Plugins
-
-- html-webpack-plugin
-- mini-css-extract-plugin
-- copy-webpack-plugin
-
-## Command
-
-Development
-
-```bash
-npm run dev
-```
-
-Production
-
-```bash
-npm run build
-```
+> Try to use sandbox without chrome.storage size limitation.

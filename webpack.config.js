@@ -97,7 +97,13 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: 'A Chrome Extension',
         template: 'src/popup/index.html',
-        filename: 'popup.html'
+        filename: 'popup.html',
+        excludeChunks: ['content', 'background']
+      }),
+      new HtmlWebpackPlugin({
+        template: 'src/sandbox/index.html',
+        filename: 'sandbox.html',
+        inject: false,
       }),
       new MiniCssExtractPlugin({
         filename: isDevelopment ? '[name].css' : '[name].[hash].css',

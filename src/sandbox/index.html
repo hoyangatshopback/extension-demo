@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox</title>
+</head>
+<body>
+    <h1>Sandbox</h1>
+    
+    <button id="handleSend">Send</button>
+
+    <script>
+        function loadScript(data, type) {
+            const el = document.createElement('script');
+            el.class = 'demo-ext-plugin';
+            if (type === 'code') {
+                el.textContent = data;
+            } else if (type === 'url') {
+                el.src = data;
+                // el.type = 'module';
+            }
+            document.documentElement.appendChild(el);
+        }
+    </script>
+    <script>
+        // Set up message event handler:
+        window.addEventListener('message', function (event) {
+            let { command, code = '', url = '' } = event.data;
+
+            if (command === 'loadScript') {
+                loadScript(code, 'code');
+
+                const { Exterior = null } = window;
+
+                event.source.postMessage({ result: 'OK', module: Exterior.settings }, event.origin);
+
+            } else if (command === 'injectModule') {
+                loadScript(url, 'url');
+                const { Exterior = null } = window;
+            }
+        })
+
+        handleSend.addEventListener('click', function (e) {
+            // console.log('e :>> ', e);
+            // alert('click')
+            // window.parent.postMessage("myevent", "*");
+
+            // fetch('https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
+            //     .then(resp => resp.text())
+            //     .then(code => loadScript(code))
+            //     .then(() => {
+            //         console.log(`$ => ${window.$}`);
+            //         console.log(`jquery => ${window.jQuery}`);
+            //         $('#handleSend').addClass('new-class');
+            //     })
+        })
+    </script>
+</body>
+</html>
